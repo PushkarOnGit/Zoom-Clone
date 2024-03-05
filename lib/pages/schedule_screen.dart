@@ -52,76 +52,78 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 60,
-            child: TextField(
-              controller: roomcontroller,
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                fillColor: secondaryBackgroundColor,
-                filled: true,
-                border: InputBorder.none,
-                hintText: "Room ID",
-                // contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 60,
+              child: TextField(
+                controller: roomcontroller,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  fillColor: secondaryBackgroundColor,
+                  filled: true,
+                  border: InputBorder.none,
+                  hintText: "Room ID",
+                  // contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 60,
-            child: TextField(
-              controller: namecontroller,
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.name,
-              decoration: const InputDecoration(
-                fillColor: secondaryBackgroundColor,
-                filled: true,
-                border: InputBorder.none,
-                hintText: "Name",
-                // contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+            SizedBox(
+              height: 60,
+              child: TextField(
+                controller: namecontroller,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.name,
+                decoration: const InputDecoration(
+                  fillColor: secondaryBackgroundColor,
+                  filled: true,
+                  border: InputBorder.none,
+                  hintText: "Name",
+                  // contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          customOption("Date", "Select Date", () async {
-            DateTime? temp = await showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime.now(),
-              lastDate: DateTime(2101),
-            );
-            setState(() {
-              selectedDate = temp;
-              formatedDate = DateFormat('yyyy-MM-dd').format(temp as DateTime);
-            });
-          }, true),
-          const SizedBox(
-            height: 20,
-          ),
-          customOption("Time", "Select Time", () async {
-            TimeOfDay? temp = await showTimePicker(
-              context: context,
-              initialTime: TimeOfDay.now(),
-            );
-            setState(() {
-              selectedTime = temp;
-              formatedTime = temp!.format(context);
-            });
-          }, false),
-          const SizedBox(
-            height: 20,
-          ),
-          Button(
-            text: "Schedule",
-            onPressed: () => scheduleMeet(context),
-          ),
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            customOption("Date", "Select Date", () async {
+              DateTime? temp = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime(2101),
+              );
+              setState(() {
+                selectedDate = temp;
+                formatedDate = DateFormat('yyyy-MM-dd').format(temp as DateTime);
+              });
+            }, true),
+            const SizedBox(
+              height: 20,
+            ),
+            customOption("Time", "Select Time", () async {
+              TimeOfDay? temp = await showTimePicker(
+                context: context,
+                initialTime: TimeOfDay.now(),
+              );
+              setState(() {
+                selectedTime = temp;
+                formatedTime = temp!.format(context);
+              });
+            }, false),
+            const SizedBox(
+              height: 20,
+            ),
+            Button(
+              text: "Schedule",
+              onPressed: () => scheduleMeet(context),
+            ),
+          ],
+        ),
       ),
     );
   }
